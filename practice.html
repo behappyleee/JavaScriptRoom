@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Script 연습</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#insertInfo').click(function () {
+        alert($('#getName').val());
+
+        $("input:radio[name ='writeAge']").val($('#getName').val());
+        console.log($('#getName').val());
+      });
+    });
+  </script>
+  <body>
+    <table>
+      <tr>
+        <td>이름</td>
+        <td><input type="text" id="getName" /></td>
+        <td>나이</td>
+        <td><input type="text" name="writeAge" id="getAge" /></td>
+        <td><input type="button" id="insertInfo" value="입력" /></td>
+      </tr>
+      <tr>
+        <td>미현이</td>
+        <td><input type="text" id="getData" /></td>
+      </tr>
+    </table>
+  </body>
+</html>
