@@ -32,7 +32,23 @@ _자바스크립트는 Dynamic typically language 임 선언시에 데이터 타
 
 ## 연산자
 
-#### Heading 4
+_Procedure Language 는 function 이 굉장히 중요함_
+
+_자바스크립트에서 function은 object 임_
+
+_하나의 함수는 한가지 일 만 하도록 만들어야 함_
+
+_함수에 return 문이 없는 것은 return undefined 임 return 자바스크립트는 return 생략 가능_
+
+_local scope 밖에서는 안이 보이지 않고 안에서만 밖이 보인다_
+
+_First-class Function : function은 다른 변수와 마찬가지로 할당도 가능 리턴도 가능_
+
+_Callback Function --> 함수를 전달하여 상황에 적합할 시 이 함수를 호출_
+
+_anonymous function 과 named function이 있음 (named function 이 디버깅시에 나음)_
+
+_Arrow Function --> 함수를 간결하게 만들어 줌 anonoymous function 임 parameter 전달도 가능_
 
 ##### Heading 5
 
