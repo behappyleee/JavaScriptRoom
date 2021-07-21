@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // primitive type 은 메모리에 바로 올라감
+    // object type 은 타입이 커서 한번에 올라갈 수있음 담겨있는 곳을 reference 함
+    // primitive type 은 value 로 저장되고 objective type 은 주소값이 저장이 됨
+    var a = 3;
+    var b = {
+      name: 'lee',
+      age: 30,
+    }; // a 3 이출력 b 는 object가 출력
+    console.log(a);
+    console.log(b);
+    // Operator
+    console.log('1' + 2); // string + number 일시 string 이 됨
+    // Numeric Operator
+    console.log(1 + 2);
+
+    // Increment and decrement operations
+    let counter = 3;
+    counter++;
+    console.log(counter);
+    // post increment
+    ++counter;
+    console.log(counter);
+    // Assign Opeators
+    let x = 7;
+    // < > operator
+    // Logical Operator
+
+    // or and not
+    // or : 몇 개중에 하나라도 true 일 시 True 로 계산
+    // or 연산자는 처음 true가 나올시 그대로 멈춤
+    // and : 조건식에서 모두가 true 여야 true, 그래서 처음이 false 일 시 나머지 실행 안됨
+    // and 는 Null Check 에서도 많이 사용됨
+    // not : 값을 반대로 바꾸어줌 앞에 ! 붙여줌
+
+    // strict equality, no type conversion
+
+    console.log(0 == false); // true 0 undefined null 은 false 임
+    console.log(0 === false); // fase 0 은 boolean 타입이 아님
+    console.log('' == false); // true
+    console.log('' === false); // false
+    console.log(null == undefined); // true
+    console.log(null === undefined); // false  type 이 다름
+
+    // 삼항연잔자는 간단한거에만 사용 많아질 시 가독성이 떨어짐 (if-else 문이나 switch 문으로 대체)
+
+    let browser = 'IE';
+
+    switch (browser) {
+      case 'IE':
+        console.log('go away');
+        break;
+      case 'Chrome': // 같은게 있을 시 묶어서 사용하야도 됨
+      case 'Firefox':
+        console.log('love it');
+        break;
+    }
+
+    // while 문 : 컨디션이 조건일때 실행 됨
+    let i = 2;
+    while (i < 3) {
+      console.log(i);
+      i++;
+    }
+
+    // do-while 문 실행문이 먼저 실행되고 조건을 검사
+    do {
+      console.log('do while');
+    } while (i < 3);
+
+    // break 는 아예 실행 중지 continue는 지금 것만 스킵하고 넘어감
+  </script>
+</html>
