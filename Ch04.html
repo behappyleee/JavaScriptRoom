@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Class 와 Object</title>
+  </head>
+  <body></body>
+  <script>
+    // class (fidelds, method) --> 조금연관되어 있는것들을 묶어놓은 것들
+    // 수강신청, 쇼핑몰 class 로 묶는 연습 도움 많이 됨
+    // 클래스는 template, declare once, date in --> Object 만들기 위함
+    // 붕어빵기계 (붕어빵 만드는 틀 --> 클래스, 붕어빵 --> Object)
+    class Person {
+      // constructor
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+      speak() {
+        console.log(`${this.name} : hello`);
+      }
+    }
+
+    setTimeout(() => {
+      console.log('Hello This is a CallBack 1!');
+    }, 0.001); // call back 은 무조건 동기 다 실행하고 실행이 됨 !
+    const ellie = new Person('elie', 20);
+    console.log(ellie.name);
+    console.log(ellie.age);
+    ellie.speak();
+
+    // Getter, Setter
+    class User {
+      constructor(firstName, lastName, age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+      }
+      // CallStack 초과에러 주의하기
+      // age getter 정의하는 순간 this.age 는 메모리에 올라간 것을 부루는게 아니라 바로 getter를 호츌
+      // setter 를 정의하는순간 setter 를 호출
+      get age() {
+        return this._age;
+      }
+      // 변수명 다르게 하지 않을 시 CallStack Maximum 에러 발생함
+      set age(value) {
+        this._age = value < 0 ? 0 : value;
+      }
+    }
+
+    const user1 = new User('Steve', 'Jobs', -1);
+    console.log(user1);
+    // 캡슐화는 함부로 변수설정을 하지 않게 하기 위함 (setter/ getter) 외부에서 함부로 설정하지 않게 해줌
+
+    // public, private, static fields 도 있지만 나온지 얼마 안되어 아직 쓰기에는 이름
+    // static 은 공통적으로 사용하는것 항상 똑같은 것은 static 붙여 메모리 사용 줄여주기
+
+    class Shape {
+      constructor(width, height, color) {
+        this.width = width;
+        this.height = height;
+        this.color = color;
+      }
+      draw() {
+        console.log(`drawing ${this.color} color! `);
+      }
+      getArea() {
+        return this.width * this.height;
+      }
+    }
+
+    class Rectangle extends Shape {}
+    // 만약 부모와 메서드 내용이 다를 시 override 하여 사용하면 됨
+    class Triangle extends Shape {
+      draw() {
+        super.draw(); // 부모 메서드 호출임
+      }
+      getArea() {
+        return (this.width * this.height) / 2;
+      }
+    }
+    const rectangle = new Rectangle(20, 20, 'blue');
+    const triangle = new Triangle(30, 30, 'red');
+    rectangle.draw();
+    // triangle 은 override 하여 override 한 메서드가 실행이 됨
+    triangle.getArea();
+    triangle.draw();
+
+    // 다형성 떄문에 획지적인 일들이 가능 !
+
+    // instanceof 개념 --> 상속 되었는지
+    console.log(rectangle instanceof Rectangle); // true
+    console.log(rectangle instanceof Object); //true 모든 자바스크립트는 Object를 암묵적으로 상속
+    console.log(rectangle instanceof Triangle); // false Triangle 에 인스턴스가 아님
+    setTimeout(() => {
+      console.log('Hello This is a CallBack 2!');
+    }, 0.001); // call back 은 무조건 동기 다 실행하고 실행이 됨 !
+  </script>
+</html>

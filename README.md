@@ -50,7 +50,19 @@ _anonymous function 과 named function이 있음 (named function 이 디버깅�
 
 _Arrow Function --> 함수를 간결하게 만들어 줌 anonoymous function 임 parameter 전달도 가능_
 
-##### Heading 5
+## Class 와 Object
+
+_Class --> 조금 연관되어있는것들을 묶어 놓은 것들을 말 함_
+
+_수강신청, 쇼핑몰, class 로 분류 묶는 연습 도움이 많이 됨_
+
+_클래스는 template, declare once, date in --> Object를 만들기 위함_
+
+_캡슐화는 함부로 변수설정을 외부에서 하지 않게 하기 위함 (setter/ getter)_
+
+_static은 공통적으로 사용하는 것 항상 똑같은 것은 static을 붙여 메모리 낭비 줄이기_
+
+_다형성 덕분에 획기적인 일들이 가능 !_
 
 ###### Heading 6
 

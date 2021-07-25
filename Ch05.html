@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    console.log('1');
+    console.log('5');
+    console.log('7');
+    // 비동기 콜백 !
+    // 자바스크립트는 동기적인 프로그램 (hoisting이 된 후 하나하나 실행이 됨)
+    // hoisting : var, function declaration (제일 먼저 위로 올라감)
+    // 동기 -->
+    // 비동기 --> 언제 프로그램이 실행될지 모름 ex) setTimeout() 함수
+    setTimeout(function () {
+      console.log('2'); // 1초 있다가 2를 출력함  1초 있다가 콜백 함수 실행하라고 알려줌
+    }, 1000); // 비동기적인 실행방법임
+
+    // callback --> 나중에 다시불러달라는 함수 콜백함수라고 함 (보통 Arrow 함수로 정의)
+
+    setTimeout(() => console.log('9'), 1000);
+
+    // Synchronous Callback
+    function printImmediately(print) {
+      print();
+    }
+    // 함수의 선언은 호이스팅이 됨
+    printImmediately(() => console.log('Helloooo'));
+
+    // 비동기 콜백 Asynchronous callback
+    function printWithDelay(print, timeout) {
+      setTimeout(print, timeout);
+    }
+    printWithDelay(() => console.log('async callback'), 2000);
+    // callback도 동기적으로 실행할 수 있는 방법, 비동기적으로 실행할 수 있는 방법이 있음
+    // 언어들마다 콜백을 지원하는 차이점이 있음
+
+    // 콜백지옥 예제
+    class UserStorage {
+      loginUser(id, password, onSuccess, onError) {
+        setTimeout(() => {
+          if (
+            (id === 'ellie' && password === 'dream') ||
+            (id === 'coder' && password === 'academy')
+          ) {
+            onSuccess(id);
+          } else {
+            onError(new Error('not found'));
+          }
+        }, 2000);
+      }
+
+      getRoles(user, onSuccess, onError) {
+        setTimeout(() => {
+          if (user === 'ellie') {
+            onSuccess({ name: 'ellie', role: 'admin' });
+          } else {
+            onError(new Error('no Success'));
+          }
+        }, 1000);
+      }
+    }
+    const userStorage = new UserStorage();
+    const id = prompt('enter your id');
+    const password = prompt('enter your password');
+    userStorage.loginUser(
+      id,
+      password,
+      (user) => {
+        userStorage.getRoles(
+          user,
+          (userWithRole) => {
+            alert(
+              `Hello ${userWithRole.name} , you have a ${userWithRole.role} role`
+            );
+          },
+          (error) => {
+            console.log('error');
+          }
+        );
+      },
+      (error) => {
+        console.log('error');
+      }
+    );
+    // 안에서 호출하고 또 호출하고 .... 이런게 콜백지옥
+    // 문제점 가독성이 떨어짐, 어떻게 연결되어있는지 한번에 파악이 어려움
+    // 비즈니스 로직 파악이 어려움
+    // 나중에 에러가 발생하거나 디버깅시에도 어려움이 있음
+  </script>
+</html>
