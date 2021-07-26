@@ -64,7 +64,19 @@ _static은 공통적으로 사용하는 것 항상 똑같은 것은 static을 �
 
 _다형성 덕분에 획기적인 일들이 가능 !_
 
-###### Heading 6
+## JSON (JavaScript Object Notation)
+
+_JSON은 서버와 데이터를 주고받을 수 있는 가장 간단한 방식_
+
+_HyperText : 전반적으로 쓰여지고 있는 resource 들 (꼭 hyper link 만 의미 하는건 아님 )_
+
+_object --> string (serialize)_
+
+_string --> object (deserialzie)_
+
+_Object to Json --> Stringify_
+
+_json to Object Parse_
 
 **bolic** (\*\_ 2개 감싸기 \* 1개로 감싸면 italic)
 ~~ 모양 두개로 감싸주면 strikethrough

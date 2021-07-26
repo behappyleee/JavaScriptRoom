@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // JSON :
+    // HTTP : Hypertext Transfer Protocol (request, response)
+    // HyperText : 전반적으로 쓰여지고 있는 resource들 (꼭 hyper link 들만 말하는건 아님)
+    // XMLHttpRequest 데이터를 쉽게 받을 수 있게 해줌
+    // xml 은 HTML 과 같이 마크업 언어중의 하나
+    // Server 와 데이터를 주고 받을 시에는 xml 뿐만 아니라 다양한 파일 형식도 가능
+    // json : JavaScript Object Notation ( object : {key, value} )
+    // object --> string (serialize) string --> ojbect (deserialize)
+    // 1. Object to JSON  stringfy(obj)
+    let json = JSON.stringify(true);
+    console.log(json);
+
+    json = JSON.stringify(['apple', 'banana']);
+    console.log(json);
+
+    const rabbit = {
+      name: 'tori',
+      color: 'white',
+      size: null,
+      birthDate: new Date(),
+      jump: () => {
+        // json 은 함수를 표시해주지 않음
+        console.log(`${name} can jump! `);
+      },
+    };
+
+    json = JSON.stringify(rabbit);
+    console.log(json);
+
+    json = JSON.stringify(rabbit, ['name', 'color']); // name property 만 json 으로 변환됨
+    console.log(json);
+
+    json = JSON.stringify(rabbit, (key, value) => {
+      // 조금 더 세밀하게 통제 원할시 call back 함수 사용
+      console.log(`key : ${key}, value: ${value}`);
+      return key === 'name' ? 'ellie' : value;
+    });
+    console.log(json);
+
+    // 2. JSON to Object
+    // parse(json)
+    json = JSON.stringify(rabbit); // 변환한 오브젝트는 stringify --> object 함수는 시리얼라이즈 될 떄 포함되지 않음
+    console.log(json); // rabbit  object 로 변환 이됨
+
+    const obj = JSON.parse(json, (key, value) => {
+      console.log(`key : ${key}, value: ${value}`);
+      return value;
+    });
+    console.log(obj); // JSON --> Object 파싱이 됨
+    rabbit.jump();
+    console.log(rabbit.birthDate.getDate());
+    console.log(obj.birthDate);
+    // 1. json Diff site에서 json 데이터 비교 가능
+    // 2. json Beautifier 서버에서 가져온 json 데이터를 다시 포맷을 이쁘게 만들어 줌
+    // 3. JSON Parser 사이트 json 으로부터 데이터를 어떻게 나타나는지 표기를 해줌
+  </script>
+</html>
