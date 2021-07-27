@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // Promise --> 콜백지옥을 탈출할 수 있게 도와줌
+    // Promise 는 자바스크립트에서 제공하는
+    // 정상적으로 기능이 제공되었다면 okay error 발생할시에는 error
+    // Promise --> JavaScript 안에 내장되어 있는 Object
+    // for asynchronous operation (producer 와 cosumer 차이 알기)
+    // state : pending --> fulfilled or rejected (Producer VS Consumer)
+
+    // Producer Part (resolve --> 최종적으로 성공시에 데이터 전달 , reject --> 에러 발생시에 에러를 내보냄)
+    const promise = new Promise((resolve, reject) => {
+      // doing some heavy work =(network, readfile) --> 비동기적으로 처리하는 것이좋음
+      console.log('doing something ~~ '); // 시간이 꽤 걸리므로 동기적으로 처리 시 파일을 읽어오고 네트워크에서 데이터를 받아오는데 오래걸리므로
+      // 바로 execute 하여 바로 실행이 됨 (이벤트 처리시에 발생하는 프러미스는 이렇게 처리하면 안됨 이렇게 작성시 바로 실행이됨)
+
+      setTimeout(() => {
+        //  resolve('ellie'); // resolve 는 연결 성공시에 바로 ellie를전달시켜줌
+        reject(new Error('Error !!')); // then 은 성공적인 것만 다루므로 error 는 나오지않으므로 에러발생
+      }, 2000);
+
+      // 동기적으로 처리하면 비효율적 무거운 작업들은 비동기적으로 처리하기
+    }); // class 이기 떄문에 Object를 생성 가능, 만약 promise 안에 작업들이 끝나는 순간 바로 그 작업 결과를 반환
+
+    // 이벤트 처리시에 Promise 함수 (ex button click .... )
+
+    // Consumer Part (then, catch, finally 를 이용)
+    promise
+      .then((value) => {
+        console.log(value); // 성공시에 then으로 처리를 함 위에 promise 결과를 전달 받음
+      }) // 사용하는 파트이므로 consumer part임
+      .catch((error) => {
+        console.log('Error');
+      })
+      .finally(() => {
+        // finally 는 성공 실패 상관없이 무조건 실행
+        console.log('fianlly !!'); // 무조건 수행이됨
+      });
+    // reject --> Error Object 를 통하여 에러를 전달
+
+    // 3. Promise Chaining
+    const fetchNumber = new Promise((resolve, reject) => {
+      setTimeout(() => resolve(1), 1000);
+    });
+    // then 에서는 바로 값을 전달하여도 됨
+    fetchNumber
+      .then((num) => num + 2)
+      .then((num) => num + 3)
+      .then((num) => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => resolve(num - 1), 1000);
+        }, 1000);
+      })
+      .then((num) => console.log(num));
+
+    const getHen = () =>
+      new Promise((resolve, reject) => {
+        setTimeout(() => resolve('Hen'), 1000);
+      });
+
+    const getEgg = () =>
+      new Promise((resolve, reject) => {
+        setTimeout(() => resolve('Egg'), 1000);
+      });
+
+    const getMeal = () =>
+      new Promise((resolve, reject) => {
+        setTimeout(() => resolve('Meal'), 1000);
+      });
+    // 한줄로 chaning 하여도 되지만 가독성 떄문에 한줄로 쓰지는 않음
+    //  getHen().then(getEgg).then(getMeal).then(console.log);
+  </script>
+</html>
