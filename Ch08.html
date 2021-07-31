@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // promise 를 여러가지로 chaning이 가능
+    // Chaning 이 여러가지되면 코드가 난잡해질 가능성이 있음
+    // Async, Await 기존으로 추가된
+    // Syntatctic sugar : 기존 기능에 몇가지 사용편리하게 추가된 것
+    // async & await --> clear style of using promise
+
+    // 1. async
+    function fetchUser() {
+      // do network reques in 10 secs ...
+      // return 'ellie'; 자바스크립트에 일반적인 동기처리임
+      // return new Promise() // promise (비동기 처리임) 객체를 가지고 있을시 then 사용시 처리 완료되면 넘겨줌
+      // promise 에는 resolve 와 reject 가 있음
+      // promise 상태에는 3가지가 있음 (pending ... ? )
+      return new Promise((resolve, reject) => {
+        // 자바스크립트 비동기 처리
+        resolve('ellie'); // 성공 하였을시 ellie 를 돌려줌
+      });
+    }
+
+    // 자바사크립트는 동기적이므로 비동기적인 처리를 하지 않을 시 시간이 오래결림
+    const user = fetchUser();
+    user.then(console.log); //자바스크립트에 비동기처리
+    console.log(user); // 비동기 처리를 안할 시 10 sec 가 걸림 동기적이르모
+    // 비동기적 처리를 해주어야 함
+
+    // 1. Async --> 간단한 비동기 처리
+    async function fetchLee() {
+      return 'lee';
+    }
+
+    const lee = fetchLee();
+    lee.then(console.log); // async 비동기 처리
+    console.log(lee);
+
+    // 2.await
+    function delay(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    async function getApple() {
+      await delay(3000);
+      return 'apple';
+    }
+    async function getBanana() {
+      await delay(3000);
+      return 'banana';
+    }
+
+    function pickFruits() {
+      // return getApple().then((apple) => {
+      //   return getBanana().then((banana) => `${apple} ${banana}`);
+      // }); // promise 도 너무 중첩할 시 콜백지옥이 발생을 함
+
+      // const apple = await getApple();  --> 이렇게 실행할시에 시간이 조금 오래걸림
+      // const banana = await getBanana();  --> 이렇게 처리하면 두개다 상관이 없는데 한개 실행되고 그담게 실행되므로 조금 오래걸림
+
+        const applePromise = getApple();  // 자바스크립트는 이렇게 작성시에 함수가 바로 실행이 됨
+        const bananaPromise = getBanana();
+        const apple = await applePromise; // 이렇게 코드 작성시에 병렬적으로 처리하게 되므로 시간이 단축이 됨
+        const banana = await bananaPrmoise;
+
+        return `${apple} + ${banana}`;
+    }
+
+    // 3. useful Promise
+    function pickAllfruits() {
+      return Promise.all([getApple(), getBanana()]).then(fruits=> // 위에 처럼 작성하면 지저분해 지므로
+      fruits.join(' + '));
+    } // 위에 코드를 단순화시켜주는 유용한 API 임
+    pickAllfruits().then(console.log);
+
+    function pickOnlyOne() {
+      return Promise.race([getApple(), getBanana()]);   // 만약 둘종에 먼저 성공하는 것을 실행 시켜줌
+    } // 먼저 실행하는 것을 값을 return 시켜 줌
+
+    pickOnlyOne().then(console.log);
+
+    // promise 에는 all 이나 race 유용한 API 들이 있음
+    // userStorage 부분을 위 코드 형식으로 바꾸어주기
+  </script>
+</html>
