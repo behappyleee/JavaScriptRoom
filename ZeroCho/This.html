@@ -1,0 +1,29 @@
+<script>
+    // JavaScript This 는 다른 언어들 This 랑은 많이 다름
+    // This 는 기본적으로 window 라고 생각하는게 편함
+
+    // js --> window, globalThis    globalThis 로 js 랑 node 랑 통합이 됨
+    // node --> global, globalThis 
+
+    function a() {
+        'use strict'; // strice mode 적용 방법 임
+        // strict mode 일 시에는 undefined 로 나옴
+        // use strice 안 쓸 시에는 window 가 나옴
+        console.log(this);
+    }
+    a();
+    
+    const obj = {
+        name : 'zeroCho',
+        sayName() {
+            // This 가 window 가 아니라 바뀜
+            console.log(this.name);
+        }
+    };
+
+
+
+
+
+
+</script>

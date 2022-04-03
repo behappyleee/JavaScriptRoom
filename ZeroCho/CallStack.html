@@ -1,0 +1,25 @@
+<script>
+    function a() {
+        console.log('a');
+    }
+
+    function b() {
+        console.log('b');
+    }
+
+    function c() {
+        console.log('c');
+        d();
+    }
+    function d() {
+        x();
+            function x() {
+                // debugger 만날 시 바로 그 시점에 Call Stack
+            debugger;
+        }
+    }
+    // 호출 스택 순서
+    // 1. c 2. d 3. x debugger 만나서 멈추고 call stack 보여 줌
+    c();
+
+</script>

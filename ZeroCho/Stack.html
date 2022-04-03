@@ -1,0 +1,57 @@
+<script>
+    // 호출 스택 - 호출할 때만 사용
+    
+    // 함수 선언
+    function a() {
+        console.log('Funcation a')
+    }
+
+    function b() {
+        // console.log 같은 기본 제공 함수는 실행 시 그냥 갓다 왔다고 생각
+        console.log('Function b');
+        // debugger 를 만나는 순간 debugger 가 걸리면서 
+        // 호출 스택 이 정확히 나옴
+        // debugger 사용 시 호출 스택을 볼 수 있음
+        // 개발자 도구에서 debugger 사용 시 볼 수있음
+        a();
+        x();
+        
+        function x() {
+            // debugger 를 만나는 순간 개발자 도구 클릭 시
+            // Call Stack 을 확인 할 시 Stack 쌓여있는것 을 볼 수있음
+            // Call Stack 확인 시 x b 를 볼 수 있음
+            // Call Stack 이 x  b 순으로 쌓여있음
+            debugger;
+        }
+        
+        c();
+    }
+
+    function c() {
+        a();
+        // debugger 를 만나는 순간 걸려있던 호출 Stack을 볼 수 있음
+        debugger;
+        console.log('function C');
+    }
+
+    // 함수 호출
+    // 함수 호출 시 함수에 중 괄호 안 실행문이 실행 이 됨
+    // 16 줄 a 함수가 실행 시 17행으로 넘어가는것아 아니라
+    // a 선언된 5 번째 줄로 이동이 됨
+
+    // 함수 호출 시 호출 스택에 함수 호출 된 것이 쌓임
+    // 함수 호출 스택에서 쌓이는 거랑 빠져나가는 것은
+    // 함수 호출스택에서 중괄호 끝에 도달 시 호출 스택에서 빠져나감
+    
+    // 함수 호출 시 바로 다음 줄 이동이 아니라 a 함수 선언 ㅂ부분으로 이동하여
+    // Stack 에 쌓임
+
+    // 함수 호출하였을 때 끝나면 다시 제자리로 돌아감
+    
+    // 항상 어떤 함수를 호출 시 호출 함수가 끝날 시 항상 호출한 자리로 돌아감
+    // 모든 코드가 실행 한 후 끝날 시 Anonymous 로빠져나감
+    a();    
+    b();
+    c(); 
+
+</script>

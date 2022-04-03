@@ -1,0 +1,51 @@
+<script>
+    // Hoisting 이 생길만한 상황을 안만드는것을 권장
+    // eslint 적용하여 Hoisting Code 쓰지 않기 같은 것을 사용하기
+
+    // Hoisting / TDZ 
+    // Temporal Dead Zone
+    // let / const 는 TDZ 가 있음
+    // var 는 변수 선언과 초기화를 같이 진행하지만
+    // let / const 는 변수 선언과 초기화 단계를 나누어서 진행함
+    // var / let / const 모두 hoisting 은 되지만
+    // var 는 변수 Hoisting 이 되면 선언과 초기화를 동시에 진행하여
+    // 변수 선언 부 윗쪽에 사용하여도 에러가 발생하진 않지만 (undefined) 발생
+    // let / const 는 Hoisting 은 되지만
+    // 선언과 할당 사이에 있으므로 TDZ 가 발생
+    // 그 사이에서 호출시에는 Reference Error 발생 즉 참조할 수 없다는 에러발생
+    
+    // Error 발생 const z 이므로 Hoisting 은 되지만 TDZ 가 발생
+    // 즉 Uncaught ReferenceError: 에러가 발생
+    // 만약 z 를 var 로 바꿀 시 에러는 발생 안하지만 undefined 가 발생
+    // console.log('Function Before Declare z : ' + z);
+    
+    // 화살 표 함수 
+    // Function 은 Hoisting 이 됨 (함수 표현식 같은 경우는)
+    // 하지만 함수 선언 식 화살표 함수 const 로 표현하므로 Hoisting 은되지민
+    // TDZ 가 발생함 (Error 발생)
+    const z = () => {
+        console.log('Arrow Function z');
+    }
+
+    // const 선언 부 다음 이므로 에러가 발생하지 않고 
+    // 화살표 함수 z 를 보여 줌
+    console.log('Function After Declare z : ' + z);
+
+    // Hoisting 분석 시 에는
+    // 머릿 속으로 그려지지 않을 시에는 수정을 권장
+
+    // var 는 코드 분석 시 직관 적이지 않음 (Hoisting 도 되어 불편 --> 그것도 선언 부분만 올라감)
+    // var 는 선언도 중복이 가능하면 헷갈림을 발생
+    // let 이랑 const 가 좋은 이유는 
+
+    function showTest() {
+        console.log(test);  // Err 발생 하지 않음 (const test 보다 전에 실행을 하였지만)
+                            // const test 가 Anonymous 이므로 접근이 가능 
+                            // 헷갈릴 시에는 모두 접은 뒤에 Anonymous 를 확인
+    }
+    showTest(); // Err 발생 (const 선언 전보다 실행을 먼저 하였으므로)
+    // console.log(test); --> Err 발생
+    const test = 'constTest';
+    showTest(); // Err 발생 하지 않음 (const 선언 뒤에 실행을 함)
+
+</script>

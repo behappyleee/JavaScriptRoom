@@ -1,0 +1,111 @@
+<script>
+    // Promise 
+    // Promise 객체 --> 실행이 되었는데 결과 값을 나중에 쓸 수 있는 객체
+    // Promise 는 뭔가 실행이 되었지만 결과값을 나중에 사용이 가능
+
+    setTimeout(() => {
+        console.log('setTimeOut Function Execute');
+    }, 1000)
+
+    // Callback 은 무조건 비동기가 아님
+    // Callback 은 동기 일수도 있고 비동기 일 수도있음
+    
+    function calculator(callback, a, b) {
+        return callback(a, b);
+    }
+    var a = calculator(function(x, y) {return x+y}, 3,5);
+
+    console.log('a :' + a);
+
+    // 비동기 콜백이 비동기임
+    // 1초가 조건이면 1초 뒤에 바로 실행이 됨
+    setTimeout(() => {
+        console.log('setTime After');
+    }, 1000)
+
+    // Promise 객체
+    const promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve();
+        }, 1000)
+    })
+    // Promise 란 실행이 되었지만 결과값을 나중에 사용이 가능
+    // 코드가 분리가 가능, setTimeout 은 강제 무조건 실행
+    // 하지만 Promise 객체는 나중에 사용이 가능 !!
+    promise.then(() => {
+        console.log('then promissee  !!!!!');
+    })
+
+    // Settimeout 같은거는 결과를 받고 싶지 않아도 바로 사용이 되지만
+    // promise 같은 경우는 실행이 되도 나중에 원할 때 사용이가능
+    // 나중에 결과값을 꺼내고 싶을떄
+
+    // Promise 사용법
+    // Promise 만들자 마 자 바로 then 사용 할 필요 없음
+    const promise_test = new Promise(() => {
+
+    })
+
+    // Promise 객체 사용
+    const p = new Promise() ;
+
+    // 다른 짓 ....
+
+    // Promise 객체 사용 (원 할 시에)
+    p.then();   
+
+    // 요즘에는
+    // promise --> async / await 사용 추세
+    // async / await 도 catch finally 사용을 해야 할 떄가 있음
+
+    // Ex !!
+    // axios 로 서버 주소를 가져옴
+    
+    const p1 = axios.get('서버 주소 1').then((res) => {
+        console.log('결과 값 사용 ~~~~ ');
+    });
+
+    // then 을 바로 사용 할 필요 없음 (실행 후 가지고 있어도 됨)
+    // 결과 값 나중에 사용 가능
+    const p2 = axios.get('서버 주소 2');
+    const p3 = axios.get('서버 주소 3');
+    const p4 = axios.get('서버 주소 4');
+    const p5 = axios.get('서버 주소 5');
+
+    // 다른 짓 
+
+
+    // 필요 시 호출
+    // Promist 객체 나중에 필요 시 사용이 가능
+    Promise.all([p1, p2, p3, p4, p5]).then((result) => {
+
+    }).catch((err) => {
+        // Promise 한 번에 불러 올 시 최대 단점은 하나라도 실패시 
+        // catch 문을 탐 최대 단점 나머지는 다 성공하고 하나라도 실패시 그냥 실패 됨
+    })
+
+    // all 을 방지 하기 위하여
+    Promise.allSettled([p1, p2, p3, p4, p5]).then((res) => {
+        // all 을 방지하기 위하여 allSettled 가 탄생 함
+        // allSettled 는 성공 한 것 만 사용이 가능
+        // result 에 기록이 됨
+        // 실패한 것만 필터링 하여 다시 시도 가능 (실패도 res 에 기록되서 결과가 나오기에)
+    }).catch(err => {
+        // allSettled Catch 문은 거의 필요 x 걸릴일이 거의 없음
+        // catch 문은 Promise.allSettled([p1, p2, p3, p4, p5]) 뿐 만 아니라
+        // Promise.allSettled([p1, p2, p3, p4, p5]).then((res) 전 체임
+        // then 에서 에러가 발생하여도 catch 문 을 탐
+    }).finally(() => {
+        // finally 도 사용이 가능
+    })
+
+    // 콜백 지옥의 최대 단점은 --> 결과 값을 바로 받는 것이 최대 단점
+    // Promise 객체 사용 시 나중에 사용이 가능    
+
+    try {} catch(err) {} finally{}
+
+
+
+
+
+</script>

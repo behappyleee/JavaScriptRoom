@@ -1,0 +1,66 @@
+<script>
+    // Class 는 다양한 청사진을 만들기 위한 오브젝트
+    // Counter 라는 클래스에는
+    // 자체적으로 counter 라는 변수가 있음
+    // Counter Object 를 만드는 순간 0 으로 초기화가 됨
+    class Counter {
+        // counter 변수와 increase 함수가 있음
+        // 자바스크립트는 생성자에 콜백 함수가 있지만 아무것도 전달하지 않을 시 이 인자는 undefined 가 됨
+        // 타입스크립트는 명시할 수 있어서 지점이 좋음
+        // 생성자에 아무것도 안 넣어줄 시 그냥 에러가 발생 함 undefined 에러가 발생함 
+        constructor(runEveryFiveTimes) {
+            this.counter = 0;
+            this.callback = runEveryFiveTimes;
+        }
+        // Ex counter 가 5 이상일 시 알고싶음
+        // 첫번째 시도 방법은 increase 함수 안에 if 문을 넣기
+        increase(runIf5Times) {
+            this.counter++;
+            console.log(this.counter);
+            // increase 안 에 넣을 시에는 문제 점이 
+            // Class 안 에 넣는 것이므로 사용자가 컨트롤 하기가 어려움
+            if(this.counter % 5 === 0) {
+                // console.log('yo 5 의 배수~');
+                // CallBack 함수를 전달 시 사용 자가 쉽게 컨트롤이 가능함 
+                if(this.callback) {
+                   // 자바스크립트는 타입스크립트와 달리 타입을 지정 해 줄수 없으므로 안전하게 이렇게 처리를 함 
+                   this.callback && this.callback(this.counter);
+                }
+            }
+        }
+
+    }
+
+    // Counter 객체 생성시에 counter 변수를 0 으로초기화 됨
+    // 함수 실행 시 매변 콜백 함수에 넣어주기 귀찮으므로 그냥 생성자에 넣어버림
+    const coolCounter = new Counter(printSomething);
+    console.log(coolCounter.increase);
+    // 괄호를 써주어야 호출임 그냥은 함수 자체임
+    coolCounter.increase(); // 호출 될 때 마다 1 씩 증가
+    coolCounter.increase();
+    coolCounter.increase(); 
+    coolCounter.increase();
+    coolCounter.increase(); 
+    coolCounter.increase();
+    coolCounter.increase();
+    coolCounter.increase(); 
+    coolCounter.increase();
+    coolCounter.increase(); 
+    coolCounter.increase();
+
+    // Callback 함수를 전달 함으로써 원하는 함수를 전달을 가능
+    function printSomething(num) {
+        console.log(`printSomething ${num} 이상 !`);
+    }
+
+    function alertNum(num) {
+        // 함수를 alertNum 을 생성자에 넣어줄 시 alert 이 나옴
+        alert(`숫자 : ${num}`);
+    }
+
+    // callback 함수를 이용하여 클래스를 만들어 이용 시 사용자 가 자유롭게 사용할 수 있어서 이점이 큼
+    
+
+
+
+</script>
