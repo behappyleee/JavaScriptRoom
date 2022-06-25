@@ -1,0 +1,70 @@
+<script>
+
+    // Promise 는 실행은 바로 하되 결과값을 나중에 원할 때 쓸 수 있는 것
+    const promiseTest = new Promise(() => {
+
+    // then 을 무한히 연결이 가능 
+    }).then(() => {
+
+    }).catch(() => {}
+    
+    ).then(() => {
+
+    // catch 를 꼭 마지막에 붙이지만 꼭 마지막에 붙일 필요는 없음    
+    // 마지막 catch 는 모든 문을 catch err 문을 담당하여 나누어 놓을 시 
+    // 해당 then 문 만 catch 핸들링 가능 
+    }).catch(() => {
+
+    }).fianlly(() => {
+    
+    })
+
+    function delayP(ms) {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, ms);
+        })
+    }
+
+    async function asyncTest () {
+        await delayP(1000);
+        await delayP(1000);
+        await delayP(1000);
+        await delayP(1000);
+        await delayP(1000);
+        
+        // catch 문을 따로 나누어서 처리도 가능 
+        try {
+
+        } catch(err) {
+
+        }
+        
+        try {
+
+        } catch(err) {
+
+        }
+    
+    }
+
+    // Promise 나 Async 는 잘 알아야 하는 것이 return 값을 잘 숙지를 ㅏㅎ여야 함 
+    // 
+
+
+    // Promise 를 Async 사용으로 바꾸는 것이 효율 적 임 
+    p.then((result) => {
+        console.log('esult 값 : ' + result);
+        return 1;
+    }).then(() => {
+
+    })
+
+
+    async function a() {
+        // await 을 사용시 그대로 값이 1이 됨
+        const a = await 1;
+        const b = await Promise.resolve(1);
+    }
+
+
+</script>
