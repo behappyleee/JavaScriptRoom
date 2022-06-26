@@ -1,10 +1,10 @@
-;<script>
+<script>
     // 자바스크립트에서 함수는 값이 될 수가 있음
     // 자바에서는 자바스크립트에서처럼 값이 될 수 가 없음
 
     // 자바스크립트에서 함수가 다른 함수를 리턴할수를 있음
 
-    // callback function - 다른 함수에 호출 되는 함수를 call back 이라고 함
+    // callback func;tion - 다른 함수에 호출 되는 함수를 call back 이라고 함
 
     // java script array filter Ex 
     const words = ['spray', 'limit', 'elite', 'exuberant', 'desctruction'];
@@ -12,9 +12,48 @@
     // filter 는 해당 조건을 만족하느 함수 배열을 다시만들어서 return
     const result = words.filter(word => word.length > 6);
     
+    console.log('result : ' + result);
 
+    function callBack_test(element) {
+        console.log('element Check : ' + element);
+        if(element.length > 6) {
+            console.log('element 6보다 김 !');
+            return true;
+        } else {
+            console.log('element 6보다 짧음 !');
+            return false;
+        }
+    }
 
+    // Call Back 함수를 실행 
+    const newWords = words.filter(callBack_test)
+    console.log('뉴 워즈 : ' + newWords)
 
+    // 대부분 callback 함수는 한번만 사용되기 때문에 익명 함수로도 많이 사용함
+    const newWords_Test = words.filter(function(element) {
+        return element.length > 6;
+    })
+
+    // 화살표 함수로도 사용이 가능 (파라미터가 하나인 경우 에는 괄호도 필요 없고 함수 한줄만 필요하고 중괄호도 필요가 없음 )
+    const newWords_arrow = words.filter((element) => {
+        return element.length > 6;
+    })
+
+    // Callback 함수를 직접 만듦 
+    function myfilter(origin, callback) {
+        var result = [];
+        for(var i=0; i<origin.length; i++) {
+            var current = origin[i];
+            if(callback(current)) {
+                result.push(current);
+            } 
+        }
+        return result;
+    }
+
+    newWords_myFilter = myfilter(words, element => element.length > 6)
+
+    console.log('newWords MyFilter : ' + newWords_myFilter);
 
 
 
