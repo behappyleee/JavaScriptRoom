@@ -1,0 +1,49 @@
+<script>
+    // 나만의 Promise 함수를 만들기
+    // Promise 함수에서 첫번쨰 인자는 성공 하였을 시 , 두번쨰 인자는 실패하였을 시 임 
+    var job1 = new Promise(function(resolve, reject) {
+        // Promise 가 성공 시 reolve 함수를 실행
+        // resolve('Resolved Okay');
+        
+        // 2초 후에 callback 함수를 실행하게 하도록 함 
+        setTimeout(function() {
+            // resolve('resolved Okay');
+            // 만약 실패하였을 시 다루고 싶을 시 reject 를 사용
+            reject('job1 Fail ! ');
+        }, 2000);
+    
+    });
+    
+    job1.then(function(data) {
+        console.log('job1 data : ', data);
+    })
+
+    // 보통은 Promise 함수를 함수로 감싸서 Promise 객체를 return 하여 많이 사용
+    function job2() {
+        // Promise 함수를 return 함 
+        return new Promise(function(resolve, reject) {
+        // Promise 가 성공 시 reolve 함수를 실행
+        // resolve('Resolved Okay');
+        
+        // 2초 후에 callback 함수를 실행하게 하도록 함 
+        setTimeout(function() {
+            resolve('resolved Okay');
+        }, 2000);
+    });
+}
+
+// job2 함수는 Promise 함수를 return 하므로 then 을 사용하여 받음
+job2().then(function(data) {
+    console.log('job2 data : ', data);
+})
+
+// Error 문을 처리하고 싶을 시 catch 를 사용
+// catch 를 타도 다음 then 이 작동 함 그냥 catch 문에서 작동 멈추는 것을 원할 시
+// return Promise.reject() 를 사용
+
+
+
+
+
+
+</script>

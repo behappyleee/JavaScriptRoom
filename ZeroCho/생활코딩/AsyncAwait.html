@@ -1,0 +1,107 @@
+<script>
+    // Async Await - 비동기 작업을 처리하는 기능
+
+    // timer 라는 함수 첫번째 인자는 초 두번쨰 인자는 콜백함 수 사용
+    timer(1000, function() {
+        console.log('작업');
+        // 다시 타이머가 필요 할 시 타이머를 호출
+        timer(1000, function() {
+            console.log('작업')
+            // 다시 타이머가 필요 할 시 타이머를 또 호출
+            timer(1000, function() {
+                // callback 이 계속 호출
+                // call back 안에 또 callback
+                // 이러한 것을 callback-hell 이라고 함 (콜백 지옥)
+            });
+        });
+    });
+
+    // 위와 같은 문제를 해결하기 위하여
+    timer(1000)
+        .then(function() {
+            console.log('작업')
+            // 다시 타이머를 사용하고 싶을 시 return 값으로 Promise 를 리턴 후
+            return timer(1000);
+        })  
+        .then(function() {
+            console.log('작업');
+            // 다시 타이머를 사용하고 싶을 시 return 값으로 Promise 객체를 리턴
+            return timer(1000);
+        })
+
+    // 위 아래는 똑같은 코드이지만 Promise 가 적용이 되면 서 chaining 이 되면 서 callback-hell 을 탈출이 가능함
+
+    // 하지만 위와 같은 깔끔한 방법도 만족을 하지 못하고 다른 방법이 새롭게 나옴
+
+    // 마치 동기적인 코드를 작성하는 것 처럼 단순함을 희망함
+    // 이렇게 사용을 위하 여서는 await 를 붙임
+    // await timer(1000);
+    // console.log('작업');
+
+    // await timer(1000);
+    // console.log('작업');
+
+    // await timer(1000);
+    // console.log('작업');
+
+    // 반드시 제약 사항이 async 가 붙어 있는 함수 안에서 사용을 하여야 함
+    // async 가 붙어 있는 함수는 await 를 사용하는 함수임
+    // 이런 식으로 사용 시 위에 코드와 똑같은 코드임 
+    async function run() {
+        await timer(1000);
+        console.log('작업 1');
+        await timer(1000);
+        console.log('작업 2');
+        await timer(1000);
+        console.log('작업 3');
+    }
+
+    function timer(time) {
+        return new Promise(function (resolve) {
+            // time 시간 만큼 도달 시 resolve callback 함수를 호출
+            setTimeout(function() {
+                resolve(time);
+            }, time);
+        });
+    }
+
+    // 1000 이면 1초 뒤에 실행이 됨
+    timer(1000).then(function(time) {
+        console.log('time : ' + time);
+        // 만약 1 초를 더한 timer 를 return 원할 시
+         return timer(time + 1000);
+        // 앞에 있는 Promise 동작이 끝나면 then 을 실행 함 
+        }).then(function(time) {
+            // 다시 then 을 사용 원하지 않을 시 Promise 객체를 return 하지 않고 그냥 끝냄 
+            console.log('time : ' + time);
+        });
+    
+    // 위 와 똑같은 Code 를 동기적으로 보이게 작성 함
+    
+    
+    // then 안에 첫번 째 call back parameter 는 await 을 사용 시 그대로 값 return 이 가능함
+    // Promise 를 아래처럼 Async-Await 사용 시 동기적으로 사용이 가능하게 해줌
+    // 반드 시 async 함수 안에 사용을 하여야 함 
+    // async 함수를 사용 시 Promise 객체를 return 을 함 
+    async function run() {
+        console.log('run start');    
+        var time = await timer(1000);
+        console.log('time : ', time);
+        time = await timer(time + 1000); 
+        console.log('time : ' , time);
+        time = await timer(time + 1000); 
+        console.log('time : ', time);
+        console.log('run end');
+    }
+    // console.log 는 동기 함수이므로 비동기 함수 보다 먼저 실행이 됨 
+    console.log('parent start')
+    run(); 
+    console.log('parent end');
+
+    // async 함수는 평범한 함수를 Promise 를 리턴하도록 비동기적 함수로 만들어 줌 
+
+    
+
+
+
+</script>

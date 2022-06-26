@@ -1,0 +1,37 @@
+<script>
+    // Synchronouse 동기    
+
+    // Asynchronouse 비동기
+
+    // 다음 코드는 순차적으로 실행이 됨 (싱크로노스 하다고 함 - 동기적인 실행 )
+    console.log('1');
+    console.log('2');
+    console.log('3');
+    console.log('4');
+    console.log('5');
+
+    console.log('1');
+    console.log('2');
+    // 5 초 있다가 setTimeout이 실행이 됨 
+    // setTimeout 안에 있는 코드는 독립적인 자기 시간표에 따라 코드가 작동을 함
+    // 이렇게 병렬 적으로 사용되는 코드는 Asynchronouss 라고 함 비동기적이라고 함 
+    setTimeout(function() {console.log('3')}, 5000);
+    console.log('4');
+
+    // Synchronous 장점은 순서대로 작동이 되기 때문에 예측이 쉬움
+    // Asynchronous 는 예측은 어렵지만 작동이 빠름 
+
+    // 언제 비동기적인하는 지는 언제 주가 되는 작업이 아니거나 언제 끝날지 모르는 작업은 비동기를 사용
+    // 시간이 오래 걸릴 때 아무것도 실행을 기다리는 것보다는 시간이 오래 걸릴 떄 다른 작업을 하는 것이 효율 적임 
+
+    // Browser 가 Web Server 가 Page 를 reload 하지 않고 데이터를 송수신 하는 것은 Ajax 라고 함
+
+    
+    
+
+
+
+
+
+
+</script>
